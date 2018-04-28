@@ -1,0 +1,100 @@
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+     <a class="navbar-brand" href="#">{{pageTitle}}</a>
+    
+     <ul class="nav navbar-nav">
+        <li class="active"><a [routerLink] = "['/products']">Home</a></li>
+        <li><a [routerLink] = "['/product/id']">Product</a></li>
+        <li><a [routerLink] = "['/register1']">Register</a></li>
+
+        </ul>
+
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" placeholder="Email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+        </form>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
+
+<div class= 'panel panel-primary'>
+       <!-- <div class="panel-heading">
+             Product List             
+        </div>  -->  
+        
+      
+        <div class= "panel-body">
+            <div class='row'>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"> 
+                    <!--<input type="text" />-->
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Filtered by:        <input type="text" [(ngModel)]="listFilter"/>
+                    </h3>
+                    <h3>Filter by: {{listFilter}}</h3>
+                </div>
+            </div>
+    
+            <div class="table table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <button class="btn btn-primary" (click)= 'toggleImage()'>
+                                    Show Image                                   
+                                </button>                      
+    
+                            </th>
+                            <th><b>ProductName</b></th>
+                            
+                            <th><b>Product</b></th>
+                            <th><b>Code</b></th>
+                            <th><b>Available</b></th>
+                            <th><b>Price</b></th>
+                            <th><b>5 Star Rating</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = 'let p of products | filterPipe: listFilter'>
+                            <td><img  [src] = 'p.imageUrl'/>
+                        
+                            </td>
+                            <td><a [routerLink] = "['/product', p.productId]">{{p.productname}}</a></td>
+                            <td>{{p.productId}}</td>
+                            <td>{{p.pcode | uppercase}}</td>
+                            <td>{{p.pavailable | uppercase}}</td>
+                            <td>{{p.pprice | currency: 'INR' : true :'2.2-8'}}</td>
+                            <!--<td>{{product.starRating}}</td>-->
+                            <td><ai-star [rating]='p.pstar' (notify)="onNotify($event)"></ai-star></td>
+
+                            <!-- <td>
+                                {{p.pstar}}
+                            </td>
+     -->
+                        </tr>
+    
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+</div>
